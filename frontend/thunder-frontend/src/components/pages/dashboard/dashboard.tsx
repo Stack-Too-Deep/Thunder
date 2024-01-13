@@ -1,25 +1,26 @@
-import useWalletStore from "@/store/wallet";
+import { useAccount } from "@metamask/sdk-react-ui";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import Nav from "@/components/custom/nav";
+import { CreditScoreCard } from "@/components/custom/credit-score";
+import TaskGroup from "@/components/custom/task-group";
+import "./dashboard.css";
 
 export default function Dashboard() {
-  const wallet = useWalletStore();
+  const { isConnected } = useAccount();
   const navigate = useNavigate();
 
-  const clearState = () => {
-    wallet.address = undefined;
-    navigate("/");
-  };
-
-  if (wallet.address) {
-    return (
-      <div>
-        <h1>Dashboard</h1>
-        <p>Wallet address: {wallet.address}</p>
-        <Button onClick={clearState}>Clear</Button>
-      </div>
-    );
-  } else {
+  if (!isConnected) {
     navigate("/");
   }
+
+  return (
+    <>
+      <Nav />
+      <div className="flex flex-row justify-center">
+
+      <CreditScoreCard />
+      </div>
+      <TaskGroup />
+    </>
+  );
 }
