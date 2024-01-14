@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { config } from "./Credit/config";
 import { executeQuery } from "./Credit/subgraph";
 
-function calculateTotals(data) {
+export function calculateTotals(data) {
   // Aggregate totalBorrowed by summing up the amountUSD of each borrow transaction
   const totalBorrowed = data.borrows.reduce((sum, borrow) => {
     return sum + parseFloat(borrow.amountUSD);

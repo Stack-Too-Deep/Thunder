@@ -10,7 +10,6 @@ fn main(
     issued_year: Field,
     issued_month : Field,
     issued_day : Field,
-    
 ) -> pub Field {
 
     check_claim(
