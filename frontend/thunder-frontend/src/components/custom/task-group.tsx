@@ -1,6 +1,6 @@
 import TaskCard from "./task-card";
 import { VouchChoiceModal } from "./vouch/choiceModal";
-import BorrowMoney from "./borrow-money";
+import BorrowMainModal from "./borrow/borrowMainModal";
 
 export default function TaskGroup() {
   const lendingProps = {
@@ -12,7 +12,7 @@ export default function TaskGroup() {
   const borrowingProps = {
     title: "Borrow Money",
     description: "Need money? Borrow from a lender here.",
-    buttonComponent: <BorrowMoney />
+    buttonComponent: <BorrowMainModal />
   };
 
   const vouchingProps = {

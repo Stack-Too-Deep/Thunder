@@ -11,8 +11,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useAccount } from "@metamask/sdk-react-ui";
 import { useState } from "react";
-import React, { useEffect } from "react";
 import { request, gql } from "graphql-request";
+import { useStore } from "./store";
 
 const Api_Url = `https://gateway-arbitrum.network.thegraph.com/api/7ca7636f3f5928a15f317ab35cd9ac8e/subgraphs/id/JCNWRypm7FYwV8fx5HhzZPSFaMxgkPuw4TnR3Gpi81zk`;
 const protocolQuery = gql`
@@ -247,14 +247,18 @@ async function getReputation(address) {
 export function CreditScoreCard() {
   const [credScore, setCredScore] = useState("");
   const [data, setData] = useState("");
+  const store = useStore();
 
   const { address } = useAccount();
 
   // TODO: update to show real credit score and proof data
   const calcCredScore = async () => {
-    const credScore = await getReputation(address);
-    setCredScore(credScore.toString());
-    setData("Proof :- ")
+    // const credScore = await getReputation(address);
+    store.creditScore = "250";
+    setCredScore(store.creditScore);
+    setData(
+      '["0x0074259a75fcfe44eb2ac07b9f85ac583f68bd4f2aea269f54eec6fb8416caa1", "0x19c8265516d64780d356a37502662a425247a6a5076a94ecb13c04b6c32e8e28"],[["0x0729cdcb8cb3d16871f7f8d8a3d0bdb4a531c06ab2b8b5a3e3e658b129c7e35a", "0x0537c03a1529088939e3c37153d31e44d8322879f699a2e13457e27d9fb7bce5"],["0x12221c8ff42475ab6f448013a5ca125e9daf3bd33acfd067173d2aeeb0e1e052", "0x2f9d65c06c4cad293c0c5fdaff589b5e4deb32ada594983ce7a643bdcea39956"]],["0x0344c7a92b1dafd6d2abde11eaf05dd8f31b52572d662db3e03f2281ee1e862d", "0x0836a67e03d0c19e52682c2e4c41713b0b9cda107235bbd3a0e065b4673164a0"],["0x0000000000000000000000000000000000000000000000000000000000000960","0x0000000000000000000000000000000000000000000000000000000000002710","0x0000000000000000000000000000000000000000000000000000000000004e20","0x0000000000000000000000000000000000000000000000000000000000001388","0x0000000000000000000000000000000000000000000000000000000000001388","0x000000000000000000000000000000000000000000000000000000000000000a"]'
+    );
   };
 
   return (
@@ -270,7 +274,12 @@ export function CreditScoreCard() {
         <form>
           <div className="grid w-full items-center">
             <div className="flex flex-row space-x-1.5">
-              <Input id="credScore" value={credScore} placeholder="Not calculated yet" />
+              <Input
+                id="credScore"
+                readOnly
+                value={credScore}
+                placeholder="Not calculated yet"
+              />
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
@@ -289,7 +298,12 @@ export function CreditScoreCard() {
                 </Tooltip>
               </TooltipProvider>
             </div>
-            <Textarea className="mt-4 resize-none" placeholder="zkp data" value={data}></Textarea>
+            <Textarea
+              className="mt-4 resize-none"
+              readOnly
+              placeholder="zkp data"
+              value={data}
+            ></Textarea>
           </div>
         </form>
       </CardContent>

@@ -1,0 +1,7 @@
+{
+    "totalBorrowed":"10000", 
+    "totalRepaid":"20000", 
+    "openPositions":"5000", 
+    "closedPositions":"5000", 
+    "liquidationCount":"10"
+}

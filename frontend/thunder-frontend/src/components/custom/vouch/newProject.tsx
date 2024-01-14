@@ -9,14 +9,30 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import abi from "@/abi/vouches.json";
+import { ethers } from "ethers";
 import { useState } from "react";
+import { useAccount } from "@metamask/sdk-react-ui";
+import getContract from "@/scripts/return-contract";
 
-const contractAddress = "0x23dcB293c28d6587dC2D0ACd77b7C8C0f322734f";
-/* global BigInt */
-
+const contractAddress = "0xDa65D23ad4995C8dfB6fD08bBfC548a267bF4574";
 
 export default function VouchNewProject() {
-  const [address, setAddress] = useState("");
+  const [vouchAddress, setVouchAddress] = useState("");
+  const { address: myAddress } = useAccount();
+
+  const participateInVouching = async () => {
+    const contract = await getContract(contractAddress, abi);
+    const gasLimit = 200000;
+    const stake = ethers.utils.parseEther("0.02");
+    const tx = await contract.participateInVouching(stake, {
+      gasLimit,
+    });
+    const addAddress = await contract.addAddressIfNotExists(vouchAddress, myAddress, {
+      gasLimit
+    })
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -55,11 +71,12 @@ export default function VouchNewProject() {
               id="username"
               placeholder="The address you want to vouch for.."
               className="col-span-3"
+              onChange={(e)=>{setVouchAddress(e.target.value)}}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="button">
+          <Button type="button" onClick={participateInVouching}>
             Stake 0.02 ETH
           </Button>
         </DialogFooter>
