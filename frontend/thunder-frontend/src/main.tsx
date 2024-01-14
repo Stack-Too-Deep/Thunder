@@ -3,12 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { MetaMaskProvider } from "@metamask/sdk-react";
+import { MetaMaskUIProvider } from '@metamask/sdk-react-ui';
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* TODO: Change the debug value in production */}
-    <MetaMaskProvider
+    <MetaMaskUIProvider
       debug={true}
       sdkOptions={{
         dappMetadata: {
@@ -20,6 +21,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </MetaMaskProvider>
+    </MetaMaskUIProvider>
   </React.StrictMode>
 );
