@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -11,8 +10,7 @@ import {
 interface TaskCardProps {
   title: string;
   description: string;
-  buttonText: string;
-  buttonComponent: string;
+  buttonComponent: React.ReactNode;
 }
 
 export default function TaskCard(props: TaskCardProps) {
@@ -25,7 +23,7 @@ export default function TaskCard(props: TaskCardProps) {
         <CardDescription>{props.description}</CardDescription>
       </CardHeader>
       <CardFooter className="flex justify-center">
-        <Button className="w-full" variant={"secondary"}>{props.buttonText}</Button>
+        {props.buttonComponent}
       </CardFooter>
     </Card>
   );

@@ -1,25 +1,24 @@
 import TaskCard from "./task-card";
+import { VouchChoiceModal } from "./vouch/choiceModal";
+import BorrowMoney from "./borrow-money";
 
 export default function TaskGroup() {
   const lendingProps = {
     title: "Lend Money",
     description: "Lend money to a borrower.",
-    buttonText: "Lend 💸",
-    buttonComponent: "",
+    buttonComponent: <VouchChoiceModal />
   };
 
   const borrowingProps = {
     title: "Borrow Money",
     description: "Need money? Borrow from a lender here.",
-    buttonText: "Borrow 💸",
-    buttonComponent: "",
+    buttonComponent: <BorrowMoney />
   };
 
   const vouchingProps = {
     title: "Vouch for someone",
     description: "Vouch for a borrower and earn a commission.",
-    buttonText: "Vouch 👍",
-    buttonComponent: "",
+    buttonComponent: <VouchChoiceModal />
   };
 
   return (

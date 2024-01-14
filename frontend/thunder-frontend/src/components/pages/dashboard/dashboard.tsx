@@ -17,8 +17,7 @@ export default function Dashboard() {
     <>
       <Nav />
       <div className="flex flex-row justify-center">
-
-      <CreditScoreCard />
+        <CreditScoreCard />
       </div>
       <TaskGroup />
     </>
