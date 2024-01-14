@@ -10,8 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { DoWithdraw } from "../scripts/DoWithdraw";
-
 
 const contractAddress = "0x23dcB293c28d6587dC2D0ACd77b7C8C0f322734f";
 /* global BigInt */
@@ -61,7 +59,7 @@ export default function VouchNewProject() {
           </div>
         </div>
         <DialogFooter>
-          <Button type="button" onClick={DoWithdraw}>
+          <Button type="button">
             Stake 0.02 ETH
           </Button>
         </DialogFooter>

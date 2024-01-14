@@ -244,7 +244,6 @@ async function getReputation(address) {
   return Math.floor(total);
 }
 
-
 export function CreditScoreCard() {
   const [credScore, setCredScore] = useState("");
   const [data, setData] = useState("");
@@ -255,6 +254,7 @@ export function CreditScoreCard() {
   const calcCredScore = async () => {
     const credScore = await getReputation(address);
     setCredScore(credScore.toString());
+    setData("Proof :- ")
   };
 
   return (
